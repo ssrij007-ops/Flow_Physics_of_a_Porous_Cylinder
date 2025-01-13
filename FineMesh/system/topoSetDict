@@ -1,0 +1,41 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    // porousBlockage
+    {
+        name    porousBlockageCellSet;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+  	p1       (0 0 0); // start point on cylinder axis
+    	p2       (0 0 0.2);   // end point on cylinder axis
+        radius   0.5;
+
+    }
+    {
+        name    porousBlockage;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        set     porousBlockageCellSet;
+    }
+);
+
+
+
+// ************************************************************************* //
